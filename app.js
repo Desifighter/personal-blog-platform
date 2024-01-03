@@ -17,12 +17,24 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
+
 const PORT = process.env.PORT || 3000;
-connectDB().then(() => {
-  app.listen(PORT||3000, () => {
-    console.log("listening for requests");
-  });
-});
+const startServer = ()=>{
+        try {
+          connectDB().then(() => {
+            app.listen(PORT, () => {
+              console.log("listening for requests");
+            });
+          });
+        } catch (error) {
+          console.log("kuch to dikkat hai");
+          res.status(500).send("Mongodb me problem");
+        }
+        
+}
+startServer();
+
+
 
 // mongoose.connect(process.env.uri);
 
